@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,22 @@ namespace ModificarMVVM
     /// </summary>
     public partial class MainWindow : Window
     {
+        IsmaBDEntities contexto = new IsmaBDEntities();
+        MainWindowMV mv;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            mv = new MainWindowMV(contexto);
+            contexto.CLIENTES.Load();
+            this.DataContext = contexto.CLIENTES.Local;
+
+        }
+
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            mv.Modificar();
         }
     }
 }

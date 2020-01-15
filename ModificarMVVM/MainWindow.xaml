@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:ModificarMVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="NewCommand_Executed"/>
+    </Window.CommandBindings>
     <Grid>
-        
+        <StackPanel>
+            <ComboBox x:Name="ClientesComboBox" ItemsSource="{Binding}" DisplayMemberPath="id" Width="150" HorizontalAlignment="Left"></ComboBox>
+            <StackPanel x:Name="SeleccionStackPanel" DataContext="{Binding ElementName=ClientesComboBox, Path=SelectedItem}">
+                <TextBlock Text="Id"></TextBlock>
+                <TextBox x:Name="IdTextBox" Text="{Binding id}"></TextBox>
+                <TextBlock Text="Nombre" ></TextBlock>
+                <TextBox  x:Name="NombreTextBox"  Text="{Binding nombre}"></TextBox>
+                <TextBlock Text="Apellido"></TextBlock>
+                <TextBox  x:Name="ApellidoTextBox"  Text="{Binding apellido}"></TextBox>
+            </StackPanel>
+            <Button Content="Modificar" Width="100" Margin="0,15,0,0" Command="ApplicationCommands.Save"></Button>
+        </StackPanel>
     </Grid>
 </Window>
